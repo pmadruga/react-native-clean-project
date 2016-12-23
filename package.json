@@ -1,0 +1,28 @@
+{
+  "name": "react-native-clean-project",
+  "version": "1.0.0",
+  "description": "Automating the cleaning of a React Native Project",
+  "main": "source/index.js",
+  "scripts": {
+    "test": "node source/test/index.js",
+    "lint": "eslint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pmadruga/react-native-clean-project.git"
+  },
+  "keywords": [
+    "react",
+    "native",
+    "clean"
+  ],
+  "author": "Pedro Madruga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pmadruga/react-native-clean-project/issues"
+  },
+  "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
+  "devDependencies": {
+    "eslint": "^3.12.2"
+  }
+}
