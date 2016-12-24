@@ -1,8 +1,9 @@
 {
   "name": "react-native-clean-project",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Automating the cleaning of a React Native Project",
   "main": "source/index.js",
+  "bin": "./source/index.js",
   "scripts": {
     "test": "node source/test/index.js",
     "lint": "eslint ."
