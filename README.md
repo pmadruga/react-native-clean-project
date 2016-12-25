@@ -11,12 +11,12 @@ Cleans your React Native project by purging caches and modules, and reinstalling
  This is a combination of the commands suggested in the React Native documentation plus others. They are:
  
  1. `watchman watch-del-all`
- * `rm -rf node_modules`
- * `rm -rf $TMPDIR/react-*`
- * `npm cache clean`
- * `brew update`
- * `brew upgrade`
- * `yarn`
+ 2. `rm -rf node_modules`
+ 3. `rm -rf $TMPDIR/react-*`
+ 4. `npm cache clean`
+ 5. `brew update`
+ 6. `brew upgrade`
+ 7. `yarn`
 
 # Tip
 Add to package.json
