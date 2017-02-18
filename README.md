@@ -2,14 +2,14 @@
 Cleans your React Native project by purging caches and modules, and reinstalling them again.
 
 # Install
-`yarn add react-native-clean-project`
+`yarn add -D react-native-clean-project`
 
 # Run
 `./node_modules/.bin/react-native-clean-project`
 
 # Content
  This is a combination of the commands suggested in the React Native documentation plus others. They are:
- 
+
  1. `watchman watch-del-all`
  2. `rm -rf node_modules`
  3. `rm -rf $TMPDIR/react-*`
