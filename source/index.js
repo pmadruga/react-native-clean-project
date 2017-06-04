@@ -8,7 +8,7 @@ const wipeNodeModules = spawn('rm', [
     '-rf',
     '$TMPDIR/react-*'
 ]);
-const cleanCache = spawn('npm', ['cache', 'clean']);
+const cleanCache = spawn('yarn', ['cache', 'clean']);
 const brewUpdate = spawn('brew', ['update']);
 const installNodeModules = spawn('yarn');
 

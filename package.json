@@ -25,5 +25,8 @@
   "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
   "devDependencies": {
     "eslint": "^3.12.2"
+  },
+  "dependencies": {
+    "react-navigation": "^1.0.0-beta.5"
   }
 }
