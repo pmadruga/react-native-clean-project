@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 const spawn = require('child_process').spawn;
-
 const watchman = spawn('watchman', ['watch-del-all']);
 const wipeNodeModules = spawn('rm', [
     '-rf',
