@@ -13,7 +13,7 @@ Cleans your React Native project by purging caches and modules, and reinstalling
  1. `watchman watch-del-all`
  2. `rm -rf node_modules`
  3. `rm -rf $TMPDIR/react-*`
- 4. `npm cache clean`
+ 4. `yarn cache clean`
  5. `brew update`
  6. `brew upgrade`
  7. `yarn`
@@ -27,3 +27,7 @@ Add to package.json
 	...
   },
   `
+
+# 
+
+PR's welcome
