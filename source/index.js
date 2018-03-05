@@ -76,9 +76,7 @@ function executeTask (task) {
         console.log(`Command execution failed with code: ${code}`);
       } else {
         console.log(
-          `✅  ${task.name} task has finished running in ${elapsedTime(
-            startTime
-          )}.`
+          `✅  ${task.name} task has finished running in ${elapsedTime(startTime)}.`
         );
       }
       resolve(code);
