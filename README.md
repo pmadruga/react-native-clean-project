@@ -20,13 +20,14 @@ Cleans your React Native project by purging caches and modules, and reinstalling
 
 # Tip
 Add to package.json
-`
+
+```js
 "scripts": {
-	...
-    "purge": "./node_modules/.bin/react-native-clean-project",
-	...
-  },
-  `
+  ...
+  "purge": "react-native-clean-project",
+  ...
+},
+```
 
 # 
 
