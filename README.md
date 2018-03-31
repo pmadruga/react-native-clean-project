@@ -19,13 +19,13 @@ Or add it as a script to your `package.json`
 
 ```
 "scripts": {
-    "clean": "./node_modules/.bin/react-native-clean-project"
+    "clean": "react-native-clean-project"
   }
 ```
 
 ## Contributing
 
-Please read CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-project/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-project/blob/master/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Commit guidelines
 
