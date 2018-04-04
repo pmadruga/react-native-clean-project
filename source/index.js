@@ -76,7 +76,9 @@ function executeTask (task) {
         console.log(`Command execution failed with code: ${code}`);
       } else {
         console.log(
-          `✅  ${task.name} task has finished running in ${elapsedTime(startTime)}.`
+          `✅  ${task.name} task has finished running in ${elapsedTime(
+            startTime
+          )}.`
         );
       }
       resolve(code);
@@ -89,39 +91,78 @@ const rlInterface = createInterface({
   output: process.stdout
 });
 
-let wipeiOSBuild;
-let wipeAndroidBuild;
-let wipeNodeModules;
+// Possible arguments: --remove-iOS-build --remove-android-build --keep-node-modules
+let args = process.argv.slice(2);
+// Defaults
+let wipeiOSBuild = false;
+let wipeAndroidBuild = false;
+let wipeNodeModules = true;
 
-rlInterface.question('Wipe iOS build folder? (Y/n) ', iosAnswer => {
-  if (iosAnswer === 'Y') wipeiOSBuild = true;
-
-  rlInterface.question('Wipe android build folder? (Y/n) ', androidAnswer => {
-    if (androidAnswer === 'Y') wipeAndroidBuild = true;
-
-    rlInterface.question(
-      'Wipe node_modules folder? (Y/n) ',
-      nodeModulesAnswer => {
-        if (nodeModulesAnswer === 'Y') wipeNodeModules = true;
-        rlInterface.close();
-      }
-    );
+const askQuestion = (question, callback) => {
+  rlInterface.question(question, answer => {
+    callback(answer);
   });
-});
+};
 
-rlInterface.on('close', () => {
-  if (wipeiOSBuild) executeTask(tasksList.wipeiOSBuildFolder);
-  if (wipeAndroidBuild) executeTask(tasksList.wipeAndroidBuildFolder);
-  executeTask(tasksList.watchmanCacheClear);
-  executeTask(tasksList.wipeTempCaches);
-  executeTask(tasksList.brewUpdate).then(code => {
-    if (code === 0) {
-      executeTask(tasksList.brewUpgrade);
+const askiOS = () => {
+  return new Promise(resolve => {
+    if (args.includes('--remove-iOS-build')) {
+      wipeiOSBuild = true;
+      return resolve();
+    } else {
+      askQuestion('Wipe iOS build folder? (Y/n) ', answer => {
+        wipeiOSBuild = answer === 'Y';
+        resolve();
+      });
     }
   });
-  if (wipeNodeModules) {
-    executeTask(tasksList.wipeNodeModules)
-      .then(() => executeTask(tasksList.yarnCacheClean))
-      .then(() => executeTask(tasksList.yarnInstall));
-  }
-});
+};
+
+const askAndroid = () => {
+  return new Promise(resolve => {
+    if (args.includes('--remove-android-build')) {
+      wipeAndroidBuild = true;
+      return resolve();
+    } else {
+      askQuestion('Wipe android build folder? (Y/n) ', answer => {
+        wipeAndroidBuild = answer === 'Y';
+        resolve();
+      });
+    }
+  });
+};
+
+const askNodeModules = () => {
+  return new Promise(resolve => {
+    if (args.includes('--keep-node-modules')) {
+      wipeNodeModules = false;
+      resolve();
+    } else {
+      askQuestion('Wipe node_modules folder? (Y/n) ', answer => {
+        wipeNodeModules = answer === 'Y';
+        resolve();
+      });
+    }
+  });
+};
+
+askiOS()
+  .then(askAndroid)
+  .then(askNodeModules)
+  .then(() => {
+    rlInterface.close();
+    if (wipeiOSBuild) executeTask(tasksList.wipeiOSBuildFolder);
+    if (wipeAndroidBuild) executeTask(tasksList.wipeAndroidBuildFolder);
+    executeTask(tasksList.watchmanCacheClear);
+    executeTask(tasksList.wipeTempCaches);
+    executeTask(tasksList.brewUpdate).then(code => {
+      if (code === 0) {
+        executeTask(tasksList.brewUpgrade);
+      }
+    });
+    if (wipeNodeModules) {
+      executeTask(tasksList.wipeNodeModules)
+        .then(() => executeTask(tasksList.yarnCacheClean))
+        .then(() => executeTask(tasksList.yarnInstall));
+    }
+  });
