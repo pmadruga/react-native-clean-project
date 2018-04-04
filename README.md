@@ -19,8 +19,8 @@ Or add it as a script to your `package.json`
 
 ```
 "scripts": {
-    "clean": "react-native-clean-project"
-  }
+  "clean": "react-native-clean-project"
+}
 ```
 
 ## Content
