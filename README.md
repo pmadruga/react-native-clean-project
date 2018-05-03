@@ -19,9 +19,36 @@ Or add it as a script to your `package.json`
 
 ```
 "scripts": {
-    "clean": "react-native-clean-project"
-  }
+  "clean": "react-native-clean-project"
+}
 ```
+
+## Content
+
+This is a combination of the commands suggested in the React Native documentation plus others. They are:
+
+1.  `rm -rf ios/build` (optional)
+2.  `rm -rf android/build` (optional)
+3.  `watchman watch-del-all`
+4.  `rm -rf $TMPDIR/react-*`
+5.  `rm -rf $TMPDIR/metro-*`
+6.  `brew update`
+7.  `brew upgrade`
+8.  `rm -rf node_modules` (optional)
+9.  `yarn cache clean`
+10. `yarn install`
+
+Command line arguments available for CI's:
+
+* `--remove-iOS-build`
+* `--remove-android-build`
+* `--keep-node-modules`
+
+Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
+
+## Other Tips
+
+You can also reset the Metro bundler cache when starting with `react-native start --reset-cache`
 
 ## Contributing
 
