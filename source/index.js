@@ -63,7 +63,7 @@ function elapsedTime (startTime) {
 }
 
 function executeTask (task) {
-  return new Promise(resolve => {
+  return new Promise((resolve, reject) => {
     const startTime = process.hrtime();
     const spawnedTask = spawn(task.command, task.args);
 
@@ -71,17 +71,23 @@ function executeTask (task) {
       console.log(`Error running ${task.name}: ${data}`);
     });
 
+    spawnedTask.on('error', error => {
+      console.log(`❌ Command execution failed with error: ${error.message}`);
+      reject();
+    });
+
     spawnedTask.on('exit', code => {
       if (code !== 0) {
-        console.log(`Command execution failed with code: ${code}`);
+        console.log(`❌ Command execution failed with code: ${code}`);
+        reject();
       } else {
         console.log(
           `✅  ${task.name} task has finished running in ${elapsedTime(
             startTime
           )}.`
         );
+        resolve(code);
       }
-      resolve(code);
     });
   });
 }
@@ -92,7 +98,7 @@ const rlInterface = createInterface({
 });
 
 // Possible arguments: --remove-iOS-build --remove-android-build --keep-node-modules
-let args = process.argv.slice(2);
+const args = process.argv.slice(2);
 // Defaults
 let wipeiOSBuild = false;
 let wipeAndroidBuild = false;
@@ -104,47 +110,51 @@ const askQuestion = (question, callback) => {
   });
 };
 
-const askiOS = () => {
-  return new Promise(resolve => {
+const checkAnswer = (answer, questionFunction, resolve) => {
+  if (answer === 'Y') {
+    resolve();
+    return true;
+  } else if (answer === 'n') {
+    resolve();
+    return false;
+  }
+  console.log("🚫 Please select 'Y' for yes, or 'n' for no.");
+  questionFunction().then(() => resolve());
+  return false;
+};
+
+const askiOS = () =>
+  new Promise(resolve => {
     if (args.includes('--remove-iOS-build')) {
       wipeiOSBuild = true;
       return resolve();
-    } else {
-      askQuestion('Wipe iOS build folder? (Y/n) ', answer => {
-        wipeiOSBuild = answer === 'Y';
-        resolve();
-      });
     }
+    return askQuestion('Wipe iOS build folder? (Y/n) ', answer => {
+      wipeiOSBuild = checkAnswer(answer, askiOS, resolve);
+    });
   });
-};
 
-const askAndroid = () => {
-  return new Promise(resolve => {
+const askAndroid = () =>
+  new Promise(resolve => {
     if (args.includes('--remove-android-build')) {
       wipeAndroidBuild = true;
       return resolve();
-    } else {
-      askQuestion('Wipe android build folder? (Y/n) ', answer => {
-        wipeAndroidBuild = answer === 'Y';
-        resolve();
-      });
     }
+    return askQuestion('Wipe android build folder? (Y/n) ', answer => {
+      wipeAndroidBuild = checkAnswer(answer, askAndroid, resolve);
+    });
   });
-};
 
-const askNodeModules = () => {
-  return new Promise(resolve => {
+const askNodeModules = () =>
+  new Promise(resolve => {
     if (args.includes('--keep-node-modules')) {
       wipeNodeModules = false;
-      resolve();
-    } else {
-      askQuestion('Wipe node_modules folder? (Y/n) ', answer => {
-        wipeNodeModules = answer === 'Y';
-        resolve();
-      });
+      return resolve();
     }
+    return askQuestion('Wipe node_modules folder? (Y/n) ', answer => {
+      wipeNodeModules = checkAnswer(answer, askNodeModules, resolve);
+    });
   });
-};
 
 askiOS()
   .then(askAndroid)
@@ -155,14 +165,25 @@ askiOS()
     if (wipeAndroidBuild) executeTask(tasksList.wipeAndroidBuildFolder);
     executeTask(tasksList.watchmanCacheClear);
     executeTask(tasksList.wipeTempCaches);
-    executeTask(tasksList.brewUpdate).then(code => {
-      if (code === 0) {
-        executeTask(tasksList.brewUpgrade);
-      }
-    });
+    executeTask(tasksList.brewUpdate)
+      .then(code => {
+        if (code === 0) {
+          executeTask(tasksList.brewUpgrade);
+        }
+      })
+      .catch(() => {
+        console.log(
+          "❌ Skipping task 'brew upgrade' because there was an error with 'brew update'"
+        );
+      });
     if (wipeNodeModules) {
       executeTask(tasksList.wipeNodeModules)
         .then(() => executeTask(tasksList.yarnCacheClean))
-        .then(() => executeTask(tasksList.yarnInstall));
+        .then(() => executeTask(tasksList.yarnInstall))
+        .catch(() => {
+          console.log(
+            "❌ Skipping tasks 'yarn cache clean' and 'yarn install' because there was an error with wiping the node_modules folder"
+          );
+        });
     }
   });
