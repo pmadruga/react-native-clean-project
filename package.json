@@ -1,6 +1,9 @@
 {
   "name": "react-native-clean-project",
   "version": "2.0.1",
+  "engines": {
+    "node": ">=8.9.0"
+  },
   "description": "Automating the cleaning of a React Native Project",
   "main": "./source/index.js",
   "bin": "./source/index.js",
