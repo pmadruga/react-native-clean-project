@@ -103,6 +103,7 @@ const args = process.argv.slice(2);
 let wipeiOSBuild = false;
 let wipeAndroidBuild = false;
 let wipeNodeModules = true;
+let updateBrew = true;
 
 const askQuestion = (question, callback) => {
   rlInterface.question(question, answer => {
@@ -156,16 +157,28 @@ const askNodeModules = () =>
     });
   });
 
+const askBrew = () =>
+  new Promise(resolve => {
+    if (args.includes('--keep-brew')) {
+      updateBrew = false;
+      return resolve();
+    }
+    return askQuestion('Update brew? (Y/n) ', answer => {
+      updateBrew = checkAnswer(answer, askBrew, resolve);
+    });
+  });
+
 askiOS()
   .then(askAndroid)
   .then(askNodeModules)
+  .then(askBrew)
   .then(() => {
     rlInterface.close();
     if (wipeiOSBuild) executeTask(tasksList.wipeiOSBuildFolder);
     if (wipeAndroidBuild) executeTask(tasksList.wipeAndroidBuildFolder);
     executeTask(tasksList.watchmanCacheClear);
     executeTask(tasksList.wipeTempCaches);
-    executeTask(tasksList.brewUpdate)
+    if (updateBrew) executeTask(tasksList.brewUpdate)
       .then(code => {
         if (code === 0) {
           executeTask(tasksList.brewUpgrade);
