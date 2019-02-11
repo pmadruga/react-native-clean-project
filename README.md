@@ -32,8 +32,8 @@ This is a combination of the commands suggested in the React Native documentatio
 3.  `watchman watch-del-all`
 4.  `rm -rf $TMPDIR/react-*`
 5.  `rm -rf $TMPDIR/metro-*`
-6.  `brew update`
-7.  `brew upgrade`
+6.  `brew update` (optional)
+7.  `brew upgrade` (optional)
 8.  `rm -rf node_modules` (optional)
 9.  `yarn cache clean`
 10. `yarn install`
@@ -43,6 +43,7 @@ Command line arguments available for CI's:
 * `--remove-iOS-build`
 * `--remove-android-build`
 * `--keep-node-modules`
+* `--keep-brew`
 
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
