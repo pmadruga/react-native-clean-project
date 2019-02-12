@@ -13,7 +13,7 @@ const tasksList = {
   wipeAndroidBuildFolder: {
     name: 'wipe android build folder',
     command: 'rm',
-    args: ['-rf', 'android/build']
+    args: ['-rf', 'android/build', 'android/app/build']
   },
   watchmanCacheClear: {
     name: 'watchman cache clear',
