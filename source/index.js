@@ -15,6 +15,11 @@ const tasksList = {
     command: 'rm',
     args: ['-rf', 'android/build', 'android/app/build']
   },
+  wipeAndroidGradleFolder: {
+    name: 'wipe android Gradle installation folder',
+    command: 'rm',
+    args: ['-rf', 'android/.gradle']
+  },
   watchmanCacheClear: {
     name: 'watchman cache clear',
     command: 'watchman',
@@ -104,6 +109,7 @@ let wipeiOSBuild = false;
 let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
+let wipeAndroidGradleFolder = false;
 
 const askQuestion = (question, callback) => {
   rlInterface.question(question, answer => {
@@ -112,10 +118,10 @@ const askQuestion = (question, callback) => {
 };
 
 const checkAnswer = (answer, questionFunction, resolve) => {
-  if (answer === 'Y') {
+  if (answer === 'Y' || answer === 'y') {
     resolve();
     return true;
-  } else if (answer === 'n') {
+  } else if (answer === 'N' || answer === 'n') {
     resolve();
     return false;
   }
@@ -146,6 +152,17 @@ const askAndroid = () =>
     });
   });
 
+const askAndroidGradle = () =>
+  new Promise(resolve => {
+    if (args.includes('--remove-android-gradle')) {
+      wipeAndroidGradleFolder = true;
+      return resolve();
+    }
+    return askQuestion('Wipe android gradle installation folder? (Y/n) ', answer => {
+      wipeAndroidGradleFolder = checkAnswer(answer, askAndroidGradle, resolve);
+    });
+  });
+
 const askNodeModules = () =>
   new Promise(resolve => {
     if (args.includes('--keep-node-modules')) {
@@ -170,12 +187,14 @@ const askBrew = () =>
 
 askiOS()
   .then(askAndroid)
+  .then(askAndroidGradle)
   .then(askNodeModules)
   .then(askBrew)
   .then(() => {
     rlInterface.close();
     if (wipeiOSBuild) executeTask(tasksList.wipeiOSBuildFolder);
     if (wipeAndroidBuild) executeTask(tasksList.wipeAndroidBuildFolder);
+    if (wipeAndroidGradleFolder) executeTask(tasksList.wipeAndroidGradleFolder);
     executeTask(tasksList.watchmanCacheClear);
     executeTask(tasksList.wipeTempCaches);
     if (updateBrew) executeTask(tasksList.brewUpdate)
