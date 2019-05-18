@@ -29,7 +29,7 @@
   },
   "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
   "devDependencies": {
-    "eslint": "5.2.0",
+    "eslint": "^5.16.0",
     "jest": "^24.8.0"
   }
 }
