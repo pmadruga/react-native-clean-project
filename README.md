@@ -18,7 +18,7 @@ To run on your console, just run:
 
 Or add it as a script to your `package.json`
 
-```
+```json
 "scripts": {
   "clean": "react-native-clean-project"
 }
@@ -28,15 +28,15 @@ Or add it as a script to your `package.json`
 
 This is a combination of the commands suggested in the React Native documentation plus others. They are:
 
-1.  `rm -rf ios/build` (optional)
-2.  `rm -rf android/build` (optional)
-3.  `watchman watch-del-all`
-4.  `rm -rf $TMPDIR/react-*`
-5.  `rm -rf $TMPDIR/metro-*`
-6.  `brew update` (optional)
-7.  `brew upgrade` (optional)
-8.  `rm -rf node_modules` (optional)
-9.  `yarn cache clean`
+1. `rm -rf ios/build` (optional)
+2. `rm -rf android/build` (optional)
+3. `watchman watch-del-all`
+4. `rm -rf $TMPDIR/react-*`
+5. `rm -rf $TMPDIR/metro-*`
+6. `brew update` (optional)
+7. `brew upgrade` (optional)
+8. `rm -rf node_modules` (optional)
+9. `yarn cache clean`
 10. `yarn install`
 
 Command line arguments available for CI's:
