@@ -200,3 +200,5 @@ askiOS()
         });
     }
   });
+
+module.exports = { tasksList };

@@ -1,6 +1,6 @@
 {
   "name": "react-native-clean-project",
-  "version": "2.0.1",
+  "version": "3.1.0",
   "engines": {
     "node": ">=8.9.0"
   },
@@ -8,8 +8,8 @@
   "main": "./source/index.js",
   "bin": "./source/index.js",
   "scripts": {
-    "test": "node source/test/index.js",
-    "lint": "eslint ."
+    "test": "jest",
+    "lint": "eslint . --fix"
   },
   "repository": {
     "type": "git",
@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
   "devDependencies": {
-    "eslint": "5.2.0"
+    "eslint": "5.2.0",
+    "jest": "^24.8.0"
   }
 }
