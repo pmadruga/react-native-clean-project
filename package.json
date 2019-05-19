@@ -8,8 +8,8 @@
   "main": "./source/index.js",
   "bin": "./source/index.js",
   "scripts": {
-    "dev-init": "npx react-native init example",
-    "dev-sync": "cp -rv package.json source react-native.config.js example/node_modules/react-native-clean-project/",
+    "dev-init": "npx react-native init example && pushd example && npm i react-native-clean-project && popd",
+    "dev-sync": "cp -R package.json source react-native.config.js example/node_modules/react-native-clean-project/",
     "test": "jest",
     "lint": "eslint . --fix"
   },

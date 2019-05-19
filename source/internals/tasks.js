@@ -24,7 +24,7 @@ const tasks = {
     args: ['-rf', 'android/build']
   },
   watchmanCacheClear: {
-    name: 'watchman cache clear (if watchman is found)',
+    name: 'watchman cache clear (if watchman is installed)',
     command: 'watchman watch-del-all || true',
     args: []
   },
@@ -49,14 +49,14 @@ const tasks = {
     args: ['-rf', 'node_modules', '$TMPDIR/react-*', '$TMPDIR/metro-*']
   },
   yarnCacheClean: {
-    name: 'yarn cache clean',
-    command: 'yarn',
-    args: ['cache', 'clean']
+    name: 'yarn cache clean (if yarn is installed)',
+    command: 'yarn cache clean || true',
+    args: []
   },
   yarnInstall: {
-    name: 'yarn install',
-    command: 'yarn',
-    args: ['install']
+    name: 'yarn install (if yarn is installed)',
+    command: 'yarn install || true',
+    args: []
   },
   npmCacheVerify: {
     name: 'npm cache verify',
