@@ -12,7 +12,16 @@ Cleans your React Native project by purging caches and modules, and reinstalling
 
 ## Running
 
-To run on your console, just run:
+### React-Native CLI plugin
+
+This module is automatically detected as a plugin by the standard `react-native` command, adding new sub-commands:
+
+* `react-native clean-project-auto` - fully automated project state clean: like a freshly-cloned, never-started repo
+* `react-native clean-project` - interactive project state clean: choose types of react-native state to clean
+
+### Direct execution
+
+For complete control (including using command-line arguments to non-interactively fine-tune what state is cleaned):
 
 `./node_modules/.bin/react-native-clean-project`
 
@@ -26,25 +35,22 @@ Or add it as a script to your `package.json`
 
 ## Content
 
-This is a combination of the commands suggested in the React Native documentation plus others. They are:
+This is a combination of the commands suggested in the React Native documentation plus others.
 
-1. `rm -rf ios/build` (optional)
-2. `rm -rf android/build` (optional)
-3. `watchman watch-del-all`
-4. `rm -rf $TMPDIR/react-*`
-5. `rm -rf $TMPDIR/metro-*`
-6. `brew update` (optional)
-7. `brew upgrade` (optional)
-8. `rm -rf node_modules` (optional)
-9. `yarn cache clean`
-10. `yarn install`
-
-Command line arguments available for CI's:
-
-- `--remove-iOS-build`
-- `--remove-android-build`
-- `--keep-node-modules`
-- `--keep-brew`
+| State Type           | Command                       | In `clean-project-auto`? | Optional?  | Default? | Option Flag            |
+| -------------------- | ----------------------------- | ------------------------ | ---------- | -------- | ---------------------- |
+| React-native cache   | `rm -rf $TMPDIR/react-*`      | Yes                      | No         | true     |                        |
+| Metro bundler cache  | `rm -rf $TMPDIR/metro-*`      | Yes                      | No         | true     |                        |
+| Watchman cache       | `watchman watch-del-all`      | Yes                      | No         | true     |                        |
+| NPM modules          | `rm -rf node_modules`         | Yes                      | Yes        | true     | --keep-node_modules    |
+| Yarn cache           | `yarn cache clean`            | Yes                      | Yes        | true     | --keep-node-modules    |
+| Yarn packages        | `yarn install`                | No                       | Yes        | true     | --keep-node-modules    |
+| NPM cache            | `npm cache verify`            | Yes                      | Yes        | true     | --keep-node-modules    |
+| iOS build folder     | `rm -rf ios/build`            | Yes                      | Yes        | false    | --remove-iOS-build     |
+| iOS pods folder      | `rm -rf ios/pods`             | Yes                      | Yes        | false    | --remove-iOS-pods      |
+| Android build folder | `rm -rf android/build`        | Yes                      | Yes        | false    | --remove-android-build |
+| Brew package         | `brew update && brew upgrade` | No                       | Yes        | true     | --keep-brew            |
+| Pod packages         | `pod update`                  | No                       | Yes        | true     | --keep-pods            |
 
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
@@ -58,7 +64,7 @@ Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-pro
 
 ## Authors
 
-- **Pedro Madruga** - _Initial work and maintenance_ - [pmadruga](https://github.com/pmadruga)
+* **Pedro Madruga** - _Initial work and maintenance_ - [pmadruga](https://github.com/pmadruga)
 
 See also the list of [contributors](https://github.com/pmadruga/react-native-clean-project/graphs/contributors) who participated in this project.
 
