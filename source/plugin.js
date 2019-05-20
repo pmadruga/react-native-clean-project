@@ -21,7 +21,7 @@ module.exports = [
         taskPromises.push(executeTask(task));
       });
 
-      Promise.all(taskPromises).then(() => {
+      return Promise.all(taskPromises).then(() => {
         console.log('');
         console.log('Project cleaned. Use yarn or npm, pod, etc to re-install packages.');
         console.log('You may also want to clean the metro bundler cache. It can only be cleaned on metro startup, like this:');
