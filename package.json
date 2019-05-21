@@ -29,8 +29,12 @@
   },
   "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "jest": "^24.8.0"
+    "eslint": "5.2.0",
+    "eslint-config-prettier": "4.3.0",
+    "eslint-plugin-node": "9.0.1",
+    "eslint-plugin-prettier": "3.1.0",
+    "jest": "24.8.0",
+    "prettier": "1.17.1"
   },
   "rnpm": {
     "plugin": "./source/plugin.js"

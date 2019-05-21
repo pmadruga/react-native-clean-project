@@ -62,7 +62,7 @@ const tasks = {
     name: 'npm cache verify',
     command: 'npm',
     args: ['cache', 'verify']
-  },
+  }
 };
 
 const autoTasks = [
@@ -73,7 +73,7 @@ const autoTasks = [
   tasks.wipeTempCaches,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
-  tasks.npmCacheVerify,
+  tasks.npmCacheVerify
 ];
 
 module.exports = {
