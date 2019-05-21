@@ -10,8 +10,9 @@
     "sourceType": "module"
   },
   "plugins": ["prettier"],
-  "extends": ["eslint:recommended", "plugin:node/recommended"],
+  "extends": ["plugin:prettier/recommended", "eslint:recommended", "plugin:node/recommended"],
   "rules": {
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "no-console": "off"
   }
 }
