@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 const options = require('./internals/options');
 const { executeTask } = require('./internals/executor');
 const { tasks } = require('./internals/tasks');
 
-options.askiOS()
+options
+  .askiOS()
   .then(options.askiOSPods)
   .then(options.askUpdatePods)
   .then(options.askAndroid)
@@ -12,9 +12,15 @@ options.askiOS()
   .then(options.askBrew)
   .then(() => {
     options.rlInterface.close();
-    if (options.getWipeiOSBuild()) executeTask(tasks.wipeiOSBuildFolder);
-    if (options.getWipeiOSPods()) executeTask(tasks.wipeiOSPodsFolder);
-    if (options.getWipeAndroidBuild()) executeTask(tasks.wipeAndroidBuildFolder);
+    if (options.getWipeiOSBuild()) {
+      executeTask(tasks.wipeiOSBuildFolder);
+    }
+    if (options.getWipeiOSPods()) {
+      executeTask(tasks.wipeiOSPodsFolder);
+    }
+    if (options.getWipeAndroidBuild()) {
+      executeTask(tasks.wipeAndroidBuildFolder);
+    }
     executeTask(tasks.watchmanCacheClear);
     executeTask(tasks.wipeTempCaches);
     if (options.getUpdateBrew()) {

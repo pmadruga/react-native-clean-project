@@ -119,18 +119,18 @@ const askUpdatePods = () =>
     });
   });
 
-  module.exports = {
-    getWipeiOSBuild,
-    getWipeiOSPods,
-    getWipeAndroidBuild,
-    getWipeNodeModules,
-    getUpdateBrew,
-    getUpdatePods,
-    askiOS,
-    askiOSPods,
-    askUpdatePods,
-    askAndroid,
-    askNodeModules,
-    askBrew,
-    rlInterface
-  };
+module.exports = {
+  getWipeiOSBuild,
+  getWipeiOSPods,
+  getWipeAndroidBuild,
+  getWipeNodeModules,
+  getUpdateBrew,
+  getUpdatePods,
+  askiOS,
+  askiOSPods,
+  askUpdatePods,
+  askAndroid,
+  askNodeModules,
+  askBrew,
+  rlInterface
+};

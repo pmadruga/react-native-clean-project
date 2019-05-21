@@ -1,6 +1,6 @@
 const { spawn } = require('child_process');
 
-function elapsedTime (startTime) {
+function elapsedTime(startTime) {
   const precision = 0;
   const elapsed = process.hrtime(startTime)[1] / 1000000;
   const secondCount = process.hrtime(startTime)[0];
@@ -10,17 +10,19 @@ function elapsedTime (startTime) {
   return `${millisecondCount}ms`;
 }
 
-function executeTask (task) {
+function executeTask(task) {
   return new Promise((resolve, reject) => {
     const startTime = process.hrtime();
-    const spawnedTask = spawn(task.command, task.args, {shell: true});
+    const spawnedTask = spawn(task.command, task.args, { shell: true });
 
     spawnedTask.stderr.on('data', data => {
       console.log(`Error running '${task.name}': ${data}`);
     });
 
     spawnedTask.on('error', error => {
-      console.log(`❌  Command '${task.name}' failed with error: ${error.message}`);
+      console.log(
+        `❌  Command '${task.name}' failed with error: ${error.message}`
+      );
       reject();
     });
 
@@ -41,5 +43,5 @@ function executeTask (task) {
 }
 
 module.exports = {
-  executeTask,
+  executeTask
 };

@@ -22,7 +22,6 @@ describe('Tasks List', () => {
 
 describe('Correct auto tasks run', () => {
   it('should run the correct tasks in plugin auto-clean mode', () => {
-
     // auto-mode is the first plugin function, execute it
     plugin[0].func();
     expect(tasksExecuted.length).toEqual(8);
