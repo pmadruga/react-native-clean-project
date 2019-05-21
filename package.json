@@ -8,6 +8,8 @@
   "main": "./source/index.js",
   "bin": "./source/index.js",
   "scripts": {
+    "dev-init": "npx react-native init example && pushd example && npm i react-native-clean-project && popd",
+    "dev-sync": "cp -R package.json source react-native.config.js example/node_modules/react-native-clean-project/",
     "test": "jest",
     "lint": "eslint . --fix"
   },
@@ -32,5 +34,8 @@
     "eslint-plugin-prettier": "3.1.0",
     "jest": "24.8.0",
     "prettier": "1.17.1"
+  },
+  "rnpm": {
+    "plugin": "./source/plugin.js"
   }
 }
