@@ -4,9 +4,10 @@
 
 const tasks = {
   wipeiOSBuildFolder: {
-    name: 'wipe iOS build folder',
-    command: 'rm',
-    args: ['-rf', 'ios/build']
+    name: 'wipe iOS build artifacts',
+    command:
+      'rm -rf ios/build && (killall Xcode || true) && xcrun -k && cd ios && xcodebuild -alltargets clean && cd .. && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang/ModuleCache" && rm -rf "$(getconf DARWIN_USER_CACHE_DIR)/org.llvm.clang.$(whoami)/ModuleCache" && rm -fr ~/Library/Developer/Xcode/DerivedData/ && rm -fr ~/Library/Caches/com.apple.dt.Xcode/',
+    args: []
   },
   wipeiOSPodsFolder: {
     name: 'wipe iOS Pods folder',
