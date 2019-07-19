@@ -1,13 +1,13 @@
-const { autoTasks } = require('./internals/tasks');
-const { rlInterface } = require('./internals/options');
-const { executeTask } = require('./internals/executor');
-
 module.exports = [
   {
     description:
       'fully automated project state clean: like a freshly-cloned, never-started repo',
     name: 'clean-project-auto',
     func: () => {
+      const { autoTasks } = require('./internals/tasks');
+      const { rlInterface } = require('./internals/options');
+      const { executeTask } = require('./internals/executor');
+
       console.log('');
       console.log('Executing fully-automated project clean.');
       console.log("Use 'react-native clean-project' for more control");
