@@ -66,7 +66,7 @@ const tasks = {
   },
   npmInstall: {
     name: 'npm ci',
-    command: 'package-lock.json && npm ci || true',
+    command: 'test -f package-lock.json && npm ci || true',
     args: []
   }
 };
