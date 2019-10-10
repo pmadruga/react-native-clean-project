@@ -51,18 +51,23 @@ const tasks = {
   },
   yarnCacheClean: {
     name: 'yarn cache clean (if yarn is installed)',
-    command: 'yarn cache clean || true',
+    command: 'test -f yarn.lock && yarn cache clean || true',
     args: []
   },
   yarnInstall: {
     name: 'yarn install (if yarn is installed)',
-    command: 'yarn install || true',
+    command: 'test -f yarn.lock && yarn install || true',
     args: []
   },
   npmCacheVerify: {
     name: 'npm cache verify',
     command: 'npm',
     args: ['cache', 'verify']
+  },
+  npmInstall: {
+    name: 'npm ci',
+    command: 'package-lock.json && npm ci || true',
+    args: []
   }
 };
 
@@ -74,7 +79,8 @@ const autoTasks = [
   tasks.wipeTempCaches,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
-  tasks.npmCacheVerify
+  tasks.npmCacheVerify,
+  tasks.npmInstall
 ];
 
 module.exports = {
