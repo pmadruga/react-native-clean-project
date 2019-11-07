@@ -59,6 +59,10 @@ const askiOS = () =>
       wipeiOSBuild = true;
       return resolve();
     }
+    if (args.includes('--keep-iOS-build')) {
+      wipeiOSBuild = false;
+      return resolve();
+    }
     return askQuestion('Wipe iOS build folder? (Y/n) ', answer => {
       wipeiOSBuild = checkAnswer(answer, askiOS, resolve);
     });
@@ -68,6 +72,10 @@ const askiOSPods = () =>
   new Promise(resolve => {
     if (args.includes('--remove-iOS-pods')) {
       wipeiOSBuild = true;
+      return resolve();
+    }
+    if (args.includes('--keep-iOS-pods')) {
+      wipeiOSBuild = false;
       return resolve();
     }
     return askQuestion('Wipe iOS Pods folder? (Y/n) ', answer => {
@@ -81,6 +89,10 @@ const askAndroid = () =>
       wipeAndroidBuild = true;
       return resolve();
     }
+    if (args.includes('--keep-android-build')) {
+      wipeAndroidBuild = false;
+      return resolve();
+    }
     return askQuestion('Wipe android build folder? (Y/n) ', answer => {
       wipeAndroidBuild = checkAnswer(answer, askAndroid, resolve);
     });
@@ -88,6 +100,10 @@ const askAndroid = () =>
 
 const askNodeModules = () =>
   new Promise(resolve => {
+    if (args.includes('--remove-node-modules')) {
+      wipeNodeModules = true;
+      return resolve();
+    }
     if (args.includes('--keep-node-modules')) {
       wipeNodeModules = false;
       return resolve();
@@ -99,6 +115,10 @@ const askNodeModules = () =>
 
 const askBrew = () =>
   new Promise(resolve => {
+    if (args.includes('--remove-brew')) {
+      updateBrew = true;
+      return resolve();
+    }
     if (args.includes('--keep-brew')) {
       updateBrew = false;
       return resolve();
@@ -110,6 +130,10 @@ const askBrew = () =>
 
 const askUpdatePods = () =>
   new Promise(resolve => {
+    if (args.includes('--remove-pods')) {
+      updatePods = true;
+      return resolve();
+    }
     if (args.includes('--keep-pods')) {
       updatePods = false;
       return resolve();
