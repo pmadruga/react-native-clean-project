@@ -10,6 +10,7 @@ options
   .then(options.askAndroid)
   .then(options.askNodeModules)
   .then(options.askBrew)
+  .then(options.askIsYarnProject)
   .then(() => {
     options.rlInterface.close();
     if (options.getWipeiOSBuild()) {
@@ -41,7 +42,9 @@ options
         .then(() => executeTask(tasks.yarnCacheClean))
         .then(() => executeTask(tasks.npmCacheVerify))
         .then(() => executeTask(tasks.npmInstall))
-        .then(() => executeTask(tasks.yarnInstall))
+        .then(
+          () => options.getShouldExecYarn() && executeTask(tasks.yarnInstall)
+        )
         .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
           console.log(

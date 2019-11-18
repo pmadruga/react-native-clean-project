@@ -14,6 +14,11 @@ let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
 let updatePods = true;
+let isYarnProject = true;
+
+const getShouldExecYarn = () => {
+  return isYarnProject;
+};
 
 const getWipeiOSBuild = () => {
   return wipeiOSBuild;
@@ -52,6 +57,21 @@ const checkAnswer = (answer, questionFunction, resolve) => {
   questionFunction().then(() => resolve());
   return false;
 };
+
+const askIsYarnProject = () =>
+  new Promise(resolve => {
+    if (args.includes('--isYarnProject')) {
+      isYarnProject = true;
+      return resolve();
+    }
+    if (args.includes('--isNotYarnProject')) {
+      isYarnProject = false;
+      return resolve();
+    }
+    return askQuestion('Is a yarn project? (Y/n) ', answer => {
+      wipeiOSBuild = checkAnswer(answer, askiOS, resolve);
+    });
+  });
 
 const askiOS = () =>
   new Promise(resolve => {
@@ -126,11 +146,13 @@ module.exports = {
   getWipeNodeModules,
   getUpdateBrew,
   getUpdatePods,
+  getShouldExecYarn,
   askiOS,
   askiOSPods,
   askUpdatePods,
   askAndroid,
   askNodeModules,
   askBrew,
+  askIsYarnProject,
   rlInterface
 };
