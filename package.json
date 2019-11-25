@@ -1,6 +1,6 @@
 {
   "name": "react-native-clean-project",
-  "version": "3.2.4",
+  "version": "3.3.0",
   "engines": {
     "node": ">=8.9.0"
   },
