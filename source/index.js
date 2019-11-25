@@ -40,6 +40,7 @@ options
       executeTask(tasks.wipeNodeModules)
         .then(() => executeTask(tasks.yarnCacheClean))
         .then(() => executeTask(tasks.npmCacheVerify))
+        .then(() => executeTask(tasks.npmInstall))
         .then(() => executeTask(tasks.yarnInstall))
         .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
