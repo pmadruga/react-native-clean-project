@@ -67,7 +67,7 @@ const askiOS = () =>
 const askiOSPods = () =>
   new Promise(resolve => {
     if (args.includes('--remove-iOS-pods')) {
-      wipeiOSBuild = true;
+      wipeiOSPods = true;
       return resolve();
     }
     return askQuestion('Wipe iOS Pods folder? (Y/n) ', answer => {
