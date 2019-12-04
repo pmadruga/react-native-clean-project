@@ -46,7 +46,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | Yarn cache           | `yarn cache clean`            | Yes                      | Yes        | true     | --keep-node-modules    |
 | Yarn packages        | `yarn install`                | No                       | Yes        | true     | --keep-node-modules    |
 | NPM cache            | `npm cache verify`            | Yes                      | Yes        | true     | --keep-node-modules    |
-| NPM Install          | `npm ci`                      | Yes                      | Yes        | true     | --keep-node-modules    |
+| NPM Install          | `npm ci`                      | No                       | Yes        | true     | --keep-node-modules    |
 | iOS build folder     | `rm -rf ios/build`            | Yes                      | Yes        | false    | --remove-iOS-build     |
 | iOS pods folder      | `rm -rf ios/pods`             | Yes                      | Yes        | false    | --remove-iOS-pods      |
 | Android build folder | `rm -rf android/build`        | Yes                      | Yes        | false    | --remove-android-build |

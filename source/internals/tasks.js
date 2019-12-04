@@ -79,8 +79,7 @@ const autoTasks = [
   tasks.wipeTempCaches,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
-  tasks.npmCacheVerify,
-  tasks.npmInstall
+  tasks.npmCacheVerify
 ];
 
 module.exports = {
