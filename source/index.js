@@ -39,11 +39,10 @@ options
     }
     if (options.getWipeNodeModules()) {
       executeTask(tasks.wipeNodeModules)
-        .then(() => executeTask(tasks.yarnCacheClean))
         .then(() => executeTask(tasks.npmCacheVerify))
         .then(() => executeTask(tasks.npmInstall))
         .then(
-          () => options.getShouldExecYarn() && executeTask(tasks.yarnInstall)
+          () => options.getShouldExecYarn() && executeTask(tasks.yarnCacheClean) && executeTask(tasks.yarnInstall)
         )
         .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {

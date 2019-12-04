@@ -53,6 +53,8 @@ This is a combination of the commands suggested in the React Native documentatio
 | Brew package         | `brew update && brew upgrade` | No                       | Yes        | true     | --keep-brew            |
 | Pod packages         | `pod update`                  | No                       | Yes        | true     | --keep-pods            |
 
+If you have yarn installed but your project is using npm, you can specify `--isYarnProject`||`--isNotYarnProject` and this will skip `Yarn cache` & `Yarn packages`
+
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
 ## Other Tips
