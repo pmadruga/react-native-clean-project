@@ -55,6 +55,10 @@ This is a combination of the commands suggested in the React Native documentatio
 
 Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
+If you don't want to have interactive questions, add the `--ci` flag.
+
+Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build --ci`
+
 ## Other Tips
 
 You can also reset the Metro bundler cache when starting with `react-native start --reset-cache`
