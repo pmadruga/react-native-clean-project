@@ -12,9 +12,9 @@ const { tasks, autoTasks } = require('../source/internals/tasks');
 const plugin = require('../source/plugin');
 
 describe('Tasks List', () => {
-  it('should have twelve tasks in total', () => {
+  it('should have the correct number of tasks in total', () => {
     const input = Object.keys(tasks).length;
-    const expected = 13;
+    const expected = 14;
 
     expect(input).toEqual(expected);
   });

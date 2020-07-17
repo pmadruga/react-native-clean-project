@@ -8,6 +8,8 @@ const rlInterface = createInterface({
 // Possible arguments: --remove-iOS-build --remove-android-build --keep-node-modules
 const args = process.argv.slice(2);
 // Defaults
+
+let cleanAndroidProject = false;
 let wipeiOSBuild = false;
 let wipeiOSPods = false;
 let wipeAndroidBuild = false;
@@ -15,6 +17,9 @@ let wipeNodeModules = true;
 let updateBrew = true;
 let updatePods = true;
 
+const getCleanAndroidProject = () => {
+  return cleanAndroidProject;
+}
 const getWipeiOSBuild = () => {
   return wipeiOSBuild;
 };
@@ -75,6 +80,17 @@ const askiOSPods = () =>
     });
   });
 
+const askAndroidCleanProject = () =>
+  new Promise(resolve => {
+    if (args.includes('--clean-android-project')) {
+      cleanAndroidProject = true;
+      return resolve();
+    }
+    return askQuestion('Clean Android project? (Y/n) ', answer => {
+      cleanAndroidProject = checkAnswer(answer, askAndroidCleanProject, resolve);
+    });
+  });
+
 const askAndroid = () =>
   new Promise(resolve => {
     if (args.includes('--remove-android-build')) {
@@ -120,6 +136,7 @@ const askUpdatePods = () =>
   });
 
 module.exports = {
+  getCleanAndroidProject,
   getWipeiOSBuild,
   getWipeiOSPods,
   getWipeAndroidBuild,
@@ -130,6 +147,7 @@ module.exports = {
   askiOSPods,
   askUpdatePods,
   askAndroid,
+  askAndroidCleanProject,
   askNodeModules,
   askBrew,
   rlInterface

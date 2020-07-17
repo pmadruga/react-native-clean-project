@@ -8,6 +8,7 @@ options
   .then(options.askiOSPods)
   .then(options.askUpdatePods)
   .then(options.askAndroid)
+  .then(options.askAndroidCleanProject)
   .then(options.askNodeModules)
   .then(options.askBrew)
   .then(() => {
@@ -20,6 +21,9 @@ options
     }
     if (options.getWipeAndroidBuild()) {
       executeTask(tasks.wipeAndroidBuildFolder);
+    }
+    if (options.getCleanAndroidProject()) {
+      executeTask(tasks.cleanAndroidProject);
     }
     executeTask(tasks.watchmanCacheClear);
     executeTask(tasks.wipeTempCaches);

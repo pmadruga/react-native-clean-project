@@ -24,6 +24,11 @@ const tasks = {
     command: 'rm',
     args: ['-rf', 'android/build']
   },
+  cleanAndroidProject: {
+    name: 'clean android project',
+    command: '(cd android && ./gradlew clean)',
+    args: []
+  },
   watchmanCacheClear: {
     name: 'watchman cache clear (if watchman is installed)',
     command: 'watchman watch-del-all || true',
