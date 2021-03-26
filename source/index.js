@@ -6,6 +6,8 @@ const { tasks } = require('./internals/tasks');
 options
   .askiOS()
   .then(options.askiOSPods)
+  .then(options.askSystemPodsCache)
+  .then(options.askUserPodsCache)
   .then(options.askUpdatePods)
   .then(options.askAndroid)
   .then(options.askAndroidCleanProject)
@@ -18,6 +20,12 @@ options
     }
     if (options.getWipeiOSPods()) {
       executeTask(tasks.wipeiOSPodsFolder);
+    }
+    if (options.getWipeSystemPodsCache()) {
+      executeTask(tasks.wipeSystemPodsCache);
+    }
+    if (options.getWipeUserPodsCache()) {
+      executeTask(tasks.wipeUserPodsCache);
     }
     if (options.getWipeAndroidBuild()) {
       executeTask(tasks.wipeAndroidBuildFolder);

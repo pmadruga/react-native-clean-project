@@ -14,6 +14,16 @@ const tasks = {
     command: 'rm',
     args: ['-rf', 'ios/Pods']
   },
+  wipeSystemiOSPodsCache: {
+    name: 'wipe system iOS Pods cache',
+    command: 'pod',
+    args: ['cache', 'clear', '--all']
+  },
+  wipeUseriOSPodsCache: {
+    name: 'wipe user iOS Pods cache',
+    command: 'rm',
+    args: ['-rf', '~/.cocoapods']
+  },
   updatePods: {
     name: 'update iOS Pods',
     command: 'cd ios && pod update',
@@ -79,6 +89,8 @@ const tasks = {
 const autoTasks = [
   tasks.wipeiOSBuildFolder,
   tasks.wipeiOSPodsFolder,
+  tasks.wipeSystemiOSPodsCache,
+  tasks.wipeUseriOSPodsCache,
   tasks.wipeAndroidBuildFolder,
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
