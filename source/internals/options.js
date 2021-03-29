@@ -121,7 +121,11 @@ const askAndroidCleanProject = () =>
       return resolve();
     }
     return askQuestion('Clean Android project? (Y/n) ', answer => {
-      cleanAndroidProject = checkAnswer(answer, askAndroidCleanProject, resolve);
+      cleanAndroidProject = checkAnswer(
+        answer,
+        askAndroidCleanProject,
+        resolve
+      );
     });
   });
 
