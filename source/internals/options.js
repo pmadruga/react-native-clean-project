@@ -12,6 +12,8 @@ const args = process.argv.slice(2);
 let cleanAndroidProject = false;
 let wipeiOSBuild = false;
 let wipeiOSPods = false;
+let wipeSystemiOSPodsCache = true;
+let wipeUseriOSPodsCache = true;
 let wipeAndroidBuild = false;
 let wipeNodeModules = true;
 let updateBrew = true;
@@ -19,12 +21,18 @@ let updatePods = true;
 
 const getCleanAndroidProject = () => {
   return cleanAndroidProject;
-}
+};
 const getWipeiOSBuild = () => {
   return wipeiOSBuild;
 };
 const getWipeiOSPods = () => {
   return wipeiOSPods;
+};
+const getWipeSystemiOSPodsCache = () => {
+  return wipeSystemiOSPodsCache;
+};
+const getWipeUseriOSPodsCache = () => {
+  return wipeUseriOSPodsCache;
 };
 const getWipeAndroidBuild = () => {
   return wipeAndroidBuild;
@@ -77,6 +85,32 @@ const askiOSPods = () =>
     }
     return askQuestion('Wipe iOS Pods folder? (Y/n) ', answer => {
       wipeiOSPods = checkAnswer(answer, askiOSPods, resolve);
+    });
+  });
+
+const askSystemiOSPodsCache = () =>
+  new Promise(resolve => {
+    if (args.includes('--remove-system-iOS-pods-cache')) {
+      wipeSystemiOSPodsCache = true;
+      return resolve();
+    }
+    return askQuestion('Wipe system iOS Pods cache? (Y/n) ', answer => {
+      wipeSystemiOSPodsCache = checkAnswer(
+        answer,
+        askSystemiOSPodsCache,
+        resolve
+      );
+    });
+  });
+
+const askUseriOSPodsCache = () =>
+  new Promise(resolve => {
+    if (args.includes('--remove-user-iOS-pods-cache')) {
+      wipeUseriOSPodsCache = true;
+      return resolve();
+    }
+    return askQuestion('Wipe user iOS Pods cache? (Y/n) ', answer => {
+      wipeUseriOSPodsCache = checkAnswer(answer, askUseriOSPodsCache, resolve);
     });
   });
 
@@ -139,12 +173,16 @@ module.exports = {
   getCleanAndroidProject,
   getWipeiOSBuild,
   getWipeiOSPods,
+  getWipeSystemiOSPodsCache,
+  getWipeUseriOSPodsCache,
   getWipeAndroidBuild,
   getWipeNodeModules,
   getUpdateBrew,
   getUpdatePods,
   askiOS,
   askiOSPods,
+  askSystemiOSPodsCache,
+  askUseriOSPodsCache,
   askUpdatePods,
   askAndroid,
   askAndroidCleanProject,
