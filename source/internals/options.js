@@ -90,8 +90,8 @@ const askiOSPods = () =>
 
 const askSystemiOSPodsCache = () =>
   new Promise(resolve => {
-    if (args.includes('--remove-system-iOS-pods-cache')) {
-      wipeSystemiOSPodsCache = true;
+    if (args.includes('--keep-system-iOS-pods-cache')) {
+      wipeSystemiOSPodsCache = false;
       return resolve();
     }
     return askQuestion('Wipe system iOS Pods cache? (Y/n) ', answer => {
@@ -105,8 +105,8 @@ const askSystemiOSPodsCache = () =>
 
 const askUseriOSPodsCache = () =>
   new Promise(resolve => {
-    if (args.includes('--remove-user-iOS-pods-cache')) {
-      wipeUseriOSPodsCache = true;
+    if (args.includes('--keep-user-iOS-pods-cache')) {
+      wipeUseriOSPodsCache = false;
       return resolve();
     }
     return askQuestion('Wipe user iOS Pods cache? (Y/n) ', answer => {
