@@ -30,9 +30,6 @@ options
     if (options.getWipeAndroidBuild()) {
       executeTask(tasks.wipeAndroidBuildFolder);
     }
-    if (options.getCleanAndroidProject()) {
-      executeTask(tasks.cleanAndroidProject);
-    }
     executeTask(tasks.watchmanCacheClear);
     executeTask(tasks.wipeTempCaches);
     if (options.getUpdateBrew()) {
@@ -54,11 +51,14 @@ options
         .then(() => executeTask(tasks.npmCacheVerify))
         .then(() => executeTask(tasks.npmInstall))
         .then(() => executeTask(tasks.yarnInstall))
+        .then(() => options.getCleanAndroidProject() && executeTask(tasks.cleanAndroidProject))
         .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
           console.log(
             '❌  Examine output - error in either yarn cache clean, yarn install, or pod update'
           );
         });
+    } else if (options.getCleanAndroidProject()) {
+      executeTask(tasks.cleanAndroidProject);
     }
   });
