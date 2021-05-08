@@ -45,20 +45,26 @@ options
           );
         });
     }
+    let prepareNodeModulesTask = Promise.resolve(true);
     if (options.getWipeNodeModules()) {
-      executeTask(tasks.wipeNodeModules)
+      prepareNodeModulesTask = executeTask(tasks.wipeNodeModules)
         .then(() => executeTask(tasks.yarnCacheClean))
         .then(() => executeTask(tasks.npmCacheVerify))
         .then(() => executeTask(tasks.npmInstall))
         .then(() => executeTask(tasks.yarnInstall))
-        .then(() => options.getCleanAndroidProject() && executeTask(tasks.cleanAndroidProject))
-        .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
           console.log(
             '❌  Examine output - error in either yarn cache clean, yarn install, or pod update'
           );
         });
-    } else if (options.getCleanAndroidProject()) {
-      executeTask(tasks.cleanAndroidProject);
     }
+    prepareNodeModulesTask
+      .then(() => {
+        if (options.getCleanAndroidProject()) {
+          executeTask(tasks.cleanAndroidProject);
+        }
+        if (options.getUpdatePods()) {
+          executeTask(tasks.updatePods);
+        }
+      });
   });
