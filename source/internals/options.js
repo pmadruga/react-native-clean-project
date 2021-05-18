@@ -54,14 +54,15 @@ const askQuestion = (question, callback) => {
 };
 
 const checkAnswer = (answer, questionFunction, resolve) => {
-  if (answer === 'Y') {
+  answer = answer.toLowercase();
+  if (answer === 'y') {
     resolve();
     return true;
   } else if (answer === 'n') {
     resolve();
     return false;
   }
-  console.log("🚫 Please select 'Y' for yes, or 'n' for no.");
+  console.log("🚫 Please select 'y' for yes, or 'n' for no.");
   questionFunction().then(() => resolve());
   return false;
 };
@@ -90,8 +91,8 @@ const askiOSPods = () =>
 
 const askSystemiOSPodsCache = () =>
   new Promise(resolve => {
-    if (args.includes('--remove-system-iOS-pods-cache')) {
-      wipeSystemiOSPodsCache = true;
+    if (args.includes('--keep-system-iOS-pods-cache')) {
+      wipeSystemiOSPodsCache = false;
       return resolve();
     }
     return askQuestion('Wipe system iOS Pods cache? (Y/n) ', answer => {
@@ -105,8 +106,8 @@ const askSystemiOSPodsCache = () =>
 
 const askUseriOSPodsCache = () =>
   new Promise(resolve => {
-    if (args.includes('--remove-user-iOS-pods-cache')) {
-      wipeUseriOSPodsCache = true;
+    if (args.includes('--keep-user-iOS-pods-cache')) {
+      wipeUseriOSPodsCache = false;
       return resolve();
     }
     return askQuestion('Wipe user iOS Pods cache? (Y/n) ', answer => {
