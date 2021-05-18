@@ -54,14 +54,15 @@ const askQuestion = (question, callback) => {
 };
 
 const checkAnswer = (answer, questionFunction, resolve) => {
-  if (answer === 'Y') {
+  answer = answer.toLowercase();
+  if (answer === 'y') {
     resolve();
     return true;
   } else if (answer === 'n') {
     resolve();
     return false;
   }
-  console.log("🚫 Please select 'Y' for yes, or 'n' for no.");
+  console.log("🚫 Please select 'y' for yes, or 'n' for no.");
   questionFunction().then(() => resolve());
   return false;
 };
