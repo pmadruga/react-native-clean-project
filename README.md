@@ -68,7 +68,7 @@ Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-pro
 
 ## Authors
 
-- **Pedro Madruga** - _Initial work and maintenance_ - [pmadruga](https://github.com/pmadruga)
+- **Pedro Madruga** - [twitter](https://twitter.com/pmadruga_)
 
 See also the list of [contributors](https://github.com/pmadruga/react-native-clean-project/graphs/contributors) who participated in this project.
 
