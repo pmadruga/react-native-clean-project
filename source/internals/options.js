@@ -54,7 +54,7 @@ const askQuestion = (question, callback) => {
 };
 
 const checkAnswer = (answer, questionFunction, resolve) => {
-  answer = answer.toLowerCase();
+  answer = answer.toLowerCase() || 'y';
   if (answer === 'y') {
     resolve();
     return true;
