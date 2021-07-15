@@ -49,7 +49,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | NPM Install               | `npm ci`                          | Yes                      | Yes       | true     | --keep-node-modules          |
 | iOS build folder          | `rm -rf ios/build`                | Yes                      | Yes       | false    | --remove-iOS-build           |
 | iOS pods folder           | `rm -rf ios/Pods`                 | Yes                      | Yes       | false    | --remove-iOS-pods            |
-| system iOS pods cache     | `pod cache clear --all`           | Yes                      | Yes       | true     | --keep-system-iOS-pods-cache |
+| system iOS pods cache     | `pod cache clean --all`           | Yes                      | Yes       | true     | --keep-system-iOS-pods-cache |
 | user iOS pods cache       | `rm -rf ~/.cocoapods`             | Yes                      | Yes       | true     | --keep-user-iOS-pods-cache   |
 | Android build folder      | `rm -rf android/build`            | Yes                      | Yes       | false    | --remove-android-build       |
 | Android clean project     | `(cd android && ./gradlew clean)` | Yes                      | Yes       | false    | --clean-android-project      |
