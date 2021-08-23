@@ -91,6 +91,7 @@ const autoTasks = [
   tasks.wipeiOSPodsFolder,
   tasks.wipeSystemiOSPodsCache,
   tasks.wipeUseriOSPodsCache,
+  teask.cleanAndroidProject,
   tasks.wipeAndroidBuildFolder,
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
