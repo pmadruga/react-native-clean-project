@@ -30,9 +30,6 @@ options
     if (options.getWipeAndroidBuild()) {
       executeTask(tasks.wipeAndroidBuildFolder);
     }
-    if (options.getCleanAndroidProject()) {
-      executeTask(tasks.cleanAndroidProject);
-    }
     executeTask(tasks.watchmanCacheClear);
     executeTask(tasks.wipeTempCaches);
     if (options.getUpdateBrew()) {
@@ -48,17 +45,26 @@ options
           );
         });
     }
+    let prepareNodeModulesTask = Promise.resolve(true);
     if (options.getWipeNodeModules()) {
-      executeTask(tasks.wipeNodeModules)
+      prepareNodeModulesTask = executeTask(tasks.wipeNodeModules)
         .then(() => executeTask(tasks.yarnCacheClean))
         .then(() => executeTask(tasks.npmCacheVerify))
         .then(() => executeTask(tasks.npmInstall))
         .then(() => executeTask(tasks.yarnInstall))
-        .then(() => options.getUpdatePods() && executeTask(tasks.updatePods))
         .catch(() => {
           console.log(
             '❌  Examine output - error in either yarn cache clean, yarn install, or pod update'
           );
         });
     }
+    prepareNodeModulesTask
+      .then(() => {
+        if (options.getCleanAndroidProject()) {
+          executeTask(tasks.cleanAndroidProject);
+        }
+        if (options.getUpdatePods()) {
+          executeTask(tasks.updatePods);
+        }
+      });
   });

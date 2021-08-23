@@ -1,6 +1,6 @@
 # React Native Clean Project
 
-[![npm version](https://badge.fury.io/js/react-native-clean-project.svg)](https://badge.fury.io/js/react-native-clean-project) ![https://img.shields.io/github/license/pmadruga/react-native-clean-project.svg](https://img.shields.io/github/license/pmadruga/react-native-clean-project.svg)
+[![npm version](https://badge.fury.io/js/react-native-clean-project.svg)](https://www.npmjs.com/package/react-native-clean-project) ![https://img.shields.io/github/license/pmadruga/react-native-clean-project.svg](https://img.shields.io/github/license/pmadruga/react-native-clean-project.svg)
 [![GitHub issues](https://img.shields.io/github/issues/pmadruga/react-native-clean-project.svg)](https://github.com/pmadruga/react-native-clean-project/issues)
 [![Build Status](https://travis-ci.org/pmadruga/react-native-clean-project.svg?branch=master)](https://travis-ci.org/pmadruga/react-native-clean-project)
 
@@ -49,7 +49,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | NPM Install               | `npm ci`                          | Yes                      | Yes       | true     | --keep-node-modules          |
 | iOS build folder          | `rm -rf ios/build`                | Yes                      | Yes       | false    | --remove-iOS-build           |
 | iOS pods folder           | `rm -rf ios/Pods`                 | Yes                      | Yes       | false    | --remove-iOS-pods            |
-| system iOS pods cache     | `pod cache clear --all`           | Yes                      | Yes       | true     | --keep-system-iOS-pods-cache |
+| system iOS pods cache     | `pod cache clean --all`           | Yes                      | Yes       | true     | --keep-system-iOS-pods-cache |
 | user iOS pods cache       | `rm -rf ~/.cocoapods`             | Yes                      | Yes       | true     | --keep-user-iOS-pods-cache   |
 | Android build folder      | `rm -rf android/build`            | Yes                      | Yes       | false    | --remove-android-build       |
 | Android clean project     | `(cd android && ./gradlew clean)` | Yes                      | Yes       | false    | --clean-android-project      |
@@ -68,7 +68,7 @@ Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-pro
 
 ## Authors
 
-- **Pedro Madruga** - _Initial work and maintenance_ - [pmadruga](https://github.com/pmadruga)
+- **Pedro Madruga** - [twitter](https://twitter.com/pmadruga_)
 
 See also the list of [contributors](https://github.com/pmadruga/react-native-clean-project/graphs/contributors) who participated in this project.
 
