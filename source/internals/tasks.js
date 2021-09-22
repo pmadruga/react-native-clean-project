@@ -16,7 +16,7 @@ const tasks = {
   },
   wipeSystemiOSPodsCache: {
     name: 'wipe system iOS Pods cache',
-    command: 'pod',
+    command: 'cd ios && pod',
     args: ['cache', 'clean', '--all']
   },
   wipeUseriOSPodsCache: {
