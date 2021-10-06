@@ -15,9 +15,10 @@ function executeTask(task) {
     const startTime = process.hrtime();
     const spawnedTask = spawn(task.command, task.args, { shell: true });
 
-    spawnedTask.stderr.on('data', data => {
-      console.log(`Error running '${task.name}': ${data}`);
-    });
+    // These are just warnings and will be disabled for now.
+    // spawnedTask.stderr.on('data', data => {
+    //   console.log(`Error running '${task.name}': ${data}`);
+    // });
 
     spawnedTask.on('error', error => {
       console.log(

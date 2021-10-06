@@ -58,13 +58,12 @@ options
           );
         });
     }
-    prepareNodeModulesTask
-      .then(() => {
-        if (options.getCleanAndroidProject()) {
-          executeTask(tasks.cleanAndroidProject);
-        }
-        if (options.getUpdatePods()) {
-          executeTask(tasks.updatePods);
-        }
-      });
+    prepareNodeModulesTask.then(() => {
+      if (options.getCleanAndroidProject()) {
+        executeTask(tasks.cleanAndroidProject);
+      }
+      if (options.getUpdatePods()) {
+        executeTask(tasks.updatePods);
+      }
+    });
   });
