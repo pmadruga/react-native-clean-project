@@ -19,8 +19,9 @@ module.exports = [
       rlInterface.close(); // if we don't do this it hangs waiting for input
 
       let taskPromises = [];
-      autoTasks.forEach(task => {
-        taskPromises.push(executeTask(task));
+      autoTasks.forEach(async (task) => {
+        const result = await executeTask(task);
+        taskPromises.push(result);
       });
 
       return Promise.all(taskPromises).then(() => {

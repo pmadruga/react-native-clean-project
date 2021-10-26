@@ -1,7 +1,3 @@
-// Implementation of various command-line tasks
-// You may use argument arrays, or command lists
-// These commands are sent to node built-in spawn with options shell: true
-
 const tasks = {
   wipeiOSBuildFolder: {
     name: 'wipe iOS build artifacts',

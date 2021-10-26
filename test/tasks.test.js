@@ -2,7 +2,7 @@
 jest.mock('../source/internals/executor');
 const executor = require('../source/internals/executor');
 const tasksExecuted = [];
-executor.executeTask.mockImplementation(task => {
+executor.executeTask.mockImplementation((task) => {
   //console.log('executing task with name: ' + task.name);
   tasksExecuted.push(task.name);
   return Promise.resolve();
@@ -25,7 +25,7 @@ describe('Correct auto tasks run', () => {
     // auto-mode is the first plugin function, execute it
     plugin[0].func();
     expect(tasksExecuted.length).toEqual(12);
-    autoTasks.forEach(task => {
+    autoTasks.forEach((task) => {
       expect(tasksExecuted.includes(task.name)).toEqual(true);
     });
   });

@@ -6,7 +6,7 @@
     "jest": true
   },
   "parserOptions": {
-    "ecmaVersion": 6,
+    "ecmaVersion": "latest",
     "sourceType": "module"
   },
   "plugins": ["prettier"],
