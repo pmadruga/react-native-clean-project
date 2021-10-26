@@ -10,37 +10,40 @@ function elapsedTime(startTime) {
   return `${millisecondCount}ms`;
 }
 
-function executeTask(task) {
-  return new Promise((resolve, reject) => {
-    const startTime = process.hrtime();
-    const spawnedTask = spawn(task.command, task.args, { shell: true });
+async function executeTask(task) {
+  // return new Promise((resolve, reject) => {
+  const startTime = process.hrtime();
+  const spawnedTask = await spawn(task.command, task.args, { shell: true });
 
-    // These are just warnings and will be disabled for now.
-    // spawnedTask.stderr.on('data', data => {
-    //   console.log(`Error running '${task.name}': ${data}`);
-    // });
+  // These are just warnings and will be disabled for now.
+  // spawnedTask.stderr.on('data', data => {
+  //   console.log(`Error running '${task.name}': ${data}`);
+  // });
 
-    spawnedTask.on('error', error => {
-      console.log(
-        `❌  Command '${task.name}' failed with error: ${error.message}`
-      );
-      reject();
-    });
+  let data = '';
+  console.log('started:', task.name);
+  for await (const chunk of spawnedTask.stdout) {
+    data += chunk;
+  }
 
-    spawnedTask.on('exit', code => {
-      if (code !== 0) {
-        console.log(`❌  Command '${task.name}' failed with code: ${code}`);
-        reject();
-      } else {
-        console.log(
-          `✅  ${task.name} task has finished running in ${elapsedTime(
-            startTime
-          )}.`
-        );
-        resolve(code);
-      }
-    });
+  let error = '';
+  for await (const chunk of spawnedTask.stderr) {
+    console.error('stderr chunk: ' + chunk);
+    error += chunk;
+  }
+
+  const exitCode = await new Promise((resolve /*reject*/) => {
+    spawnedTask.on('close', resolve);
   });
+
+  if (exitCode) {
+    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+  }
+
+  console.log(
+    `✅  "${task.name}" task has finished running in ${elapsedTime(startTime)}.`
+  );
+  return data;
 }
 
 module.exports = {
