@@ -5,3 +5,5 @@ npm-debug.log
 coverage
 example
 .vscode
+.travis.yml
+.github
