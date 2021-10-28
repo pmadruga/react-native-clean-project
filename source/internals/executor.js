@@ -37,7 +37,9 @@ async function executeTask(task) {
   });
 
   if (exitCode) {
-    throw new Error(`subprocess error exit ${exitCode}, ${error}`);
+    throw new Error(
+      `\n\nTask "${task.name}" \nError: ${error}. \nExit code: ${exitCode}\n\n`
+    );
   }
 
   console.log(
