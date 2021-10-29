@@ -3,7 +3,7 @@ module.exports = [
     description:
       'fully automated project state clean: like a freshly-cloned, never-started repo',
     name: 'clean-project-auto',
-    func: () => {
+    func: async () => {
       const { autoTasks } = require('./internals/tasks');
       const { rlInterface } = require('./internals/options');
       const { executeTask } = require('./internals/executor');
@@ -24,7 +24,7 @@ module.exports = [
         }
       }
 
-      executeTasks();
+      await executeTasks();
 
       console.log('');
       console.log(
