@@ -21,14 +21,14 @@ async function executeTask(task) {
   // });
 
   let data = '';
-  console.log('started:', task.name);
+  console.log(`\nℹ️  STARTED: "${task.name}"`);
   for await (const chunk of spawnedTask.stdout) {
     data += chunk;
   }
 
   let error = '';
   for await (const chunk of spawnedTask.stderr) {
-    console.error('stderr chunk: ' + chunk);
+    // console.error('stderr chunk: ' + chunk);
     error += chunk;
   }
 
@@ -43,7 +43,9 @@ async function executeTask(task) {
   }
 
   console.log(
-    `✅  "${task.name}" task has finished running in ${elapsedTime(startTime)}.`
+    `✅ FINISHED: "${task.name}" task has finished running in ${elapsedTime(
+      startTime
+    )}.`
   );
   return data;
 }
