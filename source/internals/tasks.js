@@ -87,14 +87,14 @@ const autoTasks = [
   tasks.wipeiOSPodsFolder,
   tasks.wipeSystemiOSPodsCache,
   tasks.wipeUseriOSPodsCache,
-  tasks.cleanAndroidProject,
   tasks.wipeAndroidBuildFolder,
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
   tasks.npmCacheVerify,
-  tasks.npmInstall
+  tasks.npmInstall,
+  tasks.cleanAndroidProject
 ];
 
 module.exports = {
