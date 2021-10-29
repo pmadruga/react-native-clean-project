@@ -82,6 +82,10 @@ const tasks = {
   }
 };
 
+/**
+ * The order matters when running clean-project-auto,
+ * aka "plugin.js"
+ */
 const autoTasks = [
   tasks.wipeiOSBuildFolder,
   tasks.wipeiOSPodsFolder,
