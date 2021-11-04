@@ -42,7 +42,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | React-native cache        | `rm -rf $TMPDIR/react-*`          | Yes                      | No        | true     |                              |
 | Metro bundler cache       | `rm -rf $TMPDIR/metro-*`          | Yes                      | No        | true     |                              |
 | Watchman cache            | `watchman watch-del-all`          | Yes                      | No        | true     |                              |
-| NPM modules               | `rm -rf node_modules`             | Yes                      | Yes       | true     | --keep-node_modules          |
+| NPM modules               | `rm -rf node_modules`             | Yes                      | Yes       | true     | --keep-node-modules          |
 | Yarn cache                | `yarn cache clean`                | Yes                      | Yes       | true     | --keep-node-modules          |
 | Yarn packages             | `yarn install`                    | No                       | Yes       | true     | --keep-node-modules          |
 | NPM cache                 | `npm cache verify`                | Yes                      | Yes       | true     | --keep-node-modules          |
