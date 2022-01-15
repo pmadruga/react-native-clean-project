@@ -1,7 +1,3 @@
-// Implementation of various command-line tasks
-// You may use argument arrays, or command lists
-// These commands are sent to node built-in spawn with options shell: true
-
 const tasks = {
   wipeiOSBuildFolder: {
     name: 'wipe iOS build artifacts',
@@ -16,7 +12,7 @@ const tasks = {
   },
   wipeSystemiOSPodsCache: {
     name: 'wipe system iOS Pods cache',
-    command: 'pod',
+    command: 'cd ios & pod',
     args: ['cache', 'clean', '--all']
   },
   wipeUseriOSPodsCache: {
@@ -86,19 +82,23 @@ const tasks = {
   }
 };
 
+/**
+ * The order matters when running clean-project-auto,
+ * aka "plugin.js"
+ */
 const autoTasks = [
   tasks.wipeiOSBuildFolder,
   tasks.wipeiOSPodsFolder,
   tasks.wipeSystemiOSPodsCache,
   tasks.wipeUseriOSPodsCache,
-  tasks.cleanAndroidProject,
   tasks.wipeAndroidBuildFolder,
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
   tasks.npmCacheVerify,
-  tasks.npmInstall
+  tasks.npmInstall,
+  tasks.cleanAndroidProject
 ];
 
 module.exports = {

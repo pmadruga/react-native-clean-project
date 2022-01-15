@@ -1,8 +1,8 @@
 {
   "name": "react-native-clean-project",
-  "version": "3.6.7",
+  "version": "4.0.0",
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=10.0.0"
   },
   "description": "Automating the cleaning of a React Native Project",
   "main": "./source/index.js",
@@ -29,12 +29,12 @@
   },
   "homepage": "https://github.com/pmadruga/react-native-clean-project#readme",
   "devDependencies": {
-    "eslint": "5.2.0",
-    "eslint-config-prettier": "4.3.0",
-    "eslint-plugin-node": "9.0.1",
-    "eslint-plugin-prettier": "3.1.0",
-    "jest": "24.8.0",
-    "prettier": "1.17.1"
+    "eslint": "8.1.0",
+    "eslint-config-prettier": "8.3.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-prettier": "4.0.0",
+    "jest": "27.3.1",
+    "prettier": "2.4.1"
   },
   "rnpm": {
     "plugin": "./source/plugin.js"

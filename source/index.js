@@ -3,68 +3,60 @@ const options = require('./internals/options');
 const { executeTask } = require('./internals/executor');
 const { tasks } = require('./internals/tasks');
 
-options
-  .askiOS()
-  .then(options.askiOSPods)
-  .then(options.askSystemiOSPodsCache)
-  .then(options.askUseriOSPodsCache)
-  .then(options.askUpdatePods)
-  .then(options.askAndroid)
-  .then(options.askAndroidCleanProject)
-  .then(options.askNodeModules)
-  .then(options.askBrew)
-  .then(() => {
-    options.rlInterface.close();
-    if (options.getWipeiOSBuild()) {
-      executeTask(tasks.wipeiOSBuildFolder);
-    }
-    if (options.getWipeiOSPods()) {
-      executeTask(tasks.wipeiOSPodsFolder);
-    }
-    if (options.getWipeSystemiOSPodsCache()) {
-      executeTask(tasks.wipeSystemiOSPodsCache);
-    }
-    if (options.getWipeUseriOSPodsCache()) {
-      executeTask(tasks.wipeUseriOSPodsCache);
-    }
-    if (options.getWipeAndroidBuild()) {
-      executeTask(tasks.wipeAndroidBuildFolder);
-    }
-    executeTask(tasks.watchmanCacheClear);
-    executeTask(tasks.wipeTempCaches);
-    if (options.getUpdateBrew()) {
-      executeTask(tasks.brewUpdate)
-        .then(code => {
-          if (code === 0) {
-            executeTask(tasks.brewUpgrade);
-          }
-        })
-        .catch(() => {
-          console.log(
-            "❌ Skipping task 'brew upgrade' because there was an error with 'brew update'"
-          );
-        });
-    }
-    let prepareNodeModulesTask = Promise.resolve(true);
-    if (options.getWipeNodeModules()) {
-      prepareNodeModulesTask = executeTask(tasks.wipeNodeModules)
-        .then(() => executeTask(tasks.yarnCacheClean))
-        .then(() => executeTask(tasks.npmCacheVerify))
-        .then(() => executeTask(tasks.npmInstall))
-        .then(() => executeTask(tasks.yarnInstall))
-        .catch(() => {
-          console.log(
-            '❌  Examine output - error in either yarn cache clean, yarn install, or pod update'
-          );
-        });
-    }
-    prepareNodeModulesTask
-      .then(() => {
-        if (options.getCleanAndroidProject()) {
-          executeTask(tasks.cleanAndroidProject);
-        }
-        if (options.getUpdatePods()) {
-          executeTask(tasks.updatePods);
-        }
-      });
-  });
+async function main() {
+  await options.askiOS();
+  await options.askiOSPods();
+  await options.askSystemiOSPodsCache();
+  await options.askUseriOSPodsCache();
+  await options.askUpdatePods();
+  await options.askAndroid();
+  await options.askAndroidCleanProject();
+  await options.askNodeModules();
+  await options.askBrew();
+
+  options.rlInterface.close();
+
+  await executeTask(tasks.watchmanCacheClear);
+  await executeTask(tasks.wipeTempCaches);
+
+  if (options.getWipeiOSBuild()) {
+    await executeTask(tasks.wipeiOSBuildFolder);
+  }
+
+  if (options.getWipeiOSPods()) {
+    await executeTask(tasks.wipeiOSPodsFolder);
+  }
+
+  if (options.getWipeSystemiOSPodsCache()) {
+    await executeTask(tasks.wipeSystemiOSPodsCache);
+  }
+
+  if (options.getUpdatePods()) {
+    await executeTask(tasks.updatePods);
+  }
+
+  if (options.getWipeUseriOSPodsCache()) {
+    await executeTask(tasks.wipeUseriOSPodsCache);
+  }
+  if (options.getWipeAndroidBuild()) {
+    await executeTask(tasks.wipeAndroidBuildFolder);
+  }
+
+  if (options.getUpdateBrew()) {
+    await executeTask(tasks.brewUpdate);
+    await executeTask(tasks.brewUpgrade);
+  }
+
+  if (options.getWipeNodeModules()) {
+    await executeTask(tasks.wipeNodeModules);
+    await executeTask(tasks.yarnCacheClean);
+    await executeTask(tasks.npmInstall);
+    await executeTask(tasks.yarnInstall);
+  }
+
+  if (options.getCleanAndroidProject()) {
+    await executeTask(tasks.cleanAndroidProject);
+  }
+}
+
+main();
