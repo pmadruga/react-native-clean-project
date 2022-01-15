@@ -62,6 +62,10 @@ Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
 
 You can also reset the Metro bundler cache when starting with `react-native start --reset-cache`
 
+## Support 
+
+This library does not support windows. PR's are welcome.
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-project/blob/readme-update/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
