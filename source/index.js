@@ -2,8 +2,17 @@
 const options = require('./internals/options');
 const { executeTask } = require('./internals/executor');
 const { tasks } = require('./internals/tasks');
+const plugin = require("./plugin");
+
+const autoClean = plugin.find(p => (p.name === 'clean-project-auto'));
+const args = process.argv.slice(2);
 
 async function main() {
+  if (args.includes('--auto')) {
+    autoClean.func();
+    return;
+  }
+
   await options.askiOS();
   await options.askiOSPods();
   await options.askSystemiOSPodsCache();
