@@ -94,11 +94,11 @@ const autoTasks = [
   tasks.wipeAndroidBuildFolder,
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
+  tasks.cleanAndroidProject,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
   tasks.npmCacheVerify,
   tasks.npmInstall,
-  tasks.cleanAndroidProject
 ];
 
 module.exports = {
