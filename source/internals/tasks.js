@@ -12,7 +12,7 @@ const tasks = {
   },
   wipeSystemiOSPodsCache: {
     name: 'wipe system iOS Pods cache',
-    command: 'cd ios & bundle exec pod',
+    command: 'cd ios && bundle exec pod',
     args: ['cache', 'clean', '--all']
   },
   wipeUseriOSPodsCache: {
