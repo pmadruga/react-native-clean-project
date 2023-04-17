@@ -68,7 +68,7 @@ This library does not support windows. PR's are welcome.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://github.com/pmadruga/react-native-clean-project/blob/readme-update/CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](./CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
