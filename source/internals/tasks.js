@@ -35,6 +35,11 @@ const tasks = {
     command: '(cd android && ./gradlew clean)',
     args: []
   },
+  wipeSystemGradleCache: {
+    name: 'wipe system gradle cache',
+    command: 'rm',
+    args: ['-rf', '~/.gradle/caches']
+  },
   watchmanCacheClear: {
     name: 'watchman cache clear (if watchman is installed)',
     command: 'watchman watch-del-all || true',
@@ -95,6 +100,7 @@ const autoTasks = [
   tasks.watchmanCacheClear,
   tasks.wipeTempCaches,
   tasks.cleanAndroidProject,
+  tasks.wipeSystemGradleCache,
   tasks.wipeNodeModules,
   tasks.yarnCacheClean,
   tasks.npmCacheVerify,

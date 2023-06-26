@@ -15,6 +15,7 @@ let wipeiOSPods = false;
 let wipeSystemiOSPodsCache = true;
 let wipeUseriOSPodsCache = true;
 let wipeAndroidBuild = false;
+let wipeSystemGradleCache = false;
 let wipeNodeModules = true;
 let updateBrew = true;
 let updatePods = true;
@@ -36,6 +37,9 @@ const getWipeUseriOSPodsCache = () => {
 };
 const getWipeAndroidBuild = () => {
   return wipeAndroidBuild;
+};
+const getWipeSystemGradleCache = () => {
+  return wipeSystemGradleCache;
 };
 const getWipeNodeModules = () => {
   return wipeNodeModules;
@@ -130,6 +134,21 @@ const askAndroidCleanProject = () =>
     });
   });
 
+const askWipeSystemGradleCache = () =>
+  new Promise((resolve) => {
+    if (args.includes('--keep-system-gradle-cache')) {
+      wipeSystemGradleCache = false;
+      return resolve();
+    }
+    return askQuestion('Clean system gradle cache? (Y/n) ', (answer) => {
+      wipeSystemGradleCache = checkAnswer(
+        answer,
+        askWipeSystemGradleCache,
+        resolve
+      );
+    });
+  });
+
 const askAndroid = () =>
   new Promise((resolve) => {
     if (args.includes('--remove-android-build')) {
@@ -181,6 +200,7 @@ module.exports = {
   getWipeSystemiOSPodsCache,
   getWipeUseriOSPodsCache,
   getWipeAndroidBuild,
+  getWipeSystemGradleCache,
   getWipeNodeModules,
   getUpdateBrew,
   getUpdatePods,
@@ -188,6 +208,7 @@ module.exports = {
   askiOSPods,
   askSystemiOSPodsCache,
   askUseriOSPodsCache,
+  askWipeSystemGradleCache,
   askUpdatePods,
   askAndroid,
   askAndroidCleanProject,
