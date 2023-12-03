@@ -23,7 +23,7 @@ This module is automatically detected as a plugin by the standard `react-native`
 
 For complete control (including using command-line arguments to non-interactively fine-tune what state is cleaned):
 
-`./node_modules/.bin/react-native-clean-project`
+`npx react-native-clean-project`
 
 Or add it as a script to your `package.json`
 
@@ -56,7 +56,7 @@ This is a combination of the commands suggested in the React Native documentatio
 | Brew package              | `brew update && brew upgrade`     | No                       | Yes       | true     | --keep-brew                  |
 | Pod packages              | `pod update`                      | No                       | Yes       | true     | --keep-pods                  |
 
-Example: `./node_modules/.bin/react-native-clean-project --remove-iOS-build`
+Example: `npx react-native-clean-project --remove-iOS-build`
 
 ## Other Tips
 
