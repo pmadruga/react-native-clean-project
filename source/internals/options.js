@@ -69,6 +69,9 @@ const checkAnswer = (answer, questionFunction, resolve) => {
 
 const askiOS = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-iOS-build')) {
+      return resolve();
+    }
     if (args.includes('--remove-iOS-build')) {
       wipeiOSBuild = true;
       return resolve();
@@ -80,6 +83,9 @@ const askiOS = () =>
 
 const askiOSPods = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-iOS-pods')) {
+      return resolve();
+    }
     if (args.includes('--remove-iOS-pods')) {
       wipeiOSPods = true;
       return resolve();
@@ -91,6 +97,9 @@ const askiOSPods = () =>
 
 const askSystemiOSPodsCache = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-system-iOS-pods-cache')) {
+      return resolve();
+    }
     if (args.includes('--keep-system-iOS-pods-cache')) {
       wipeSystemiOSPodsCache = false;
       return resolve();
@@ -106,6 +115,9 @@ const askSystemiOSPodsCache = () =>
 
 const askUseriOSPodsCache = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-user-iOS-pods-cache')) {
+      return resolve();
+    }
     if (args.includes('--keep-user-iOS-pods-cache')) {
       wipeUseriOSPodsCache = false;
       return resolve();
@@ -117,6 +129,9 @@ const askUseriOSPodsCache = () =>
 
 const askAndroidCleanProject = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-android-project')) {
+      return resolve();
+    }
     if (args.includes('--clean-android-project')) {
       cleanAndroidProject = true;
       return resolve();
@@ -132,6 +147,9 @@ const askAndroidCleanProject = () =>
 
 const askAndroid = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-android-build')) {
+      return resolve();
+    }
     if (args.includes('--remove-android-build')) {
       wipeAndroidBuild = true;
       return resolve();
@@ -143,6 +161,9 @@ const askAndroid = () =>
 
 const askNodeModules = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-node-modules')) {
+      return resolve();
+    }
     if (args.includes('--keep-node-modules')) {
       wipeNodeModules = false;
       return resolve();
@@ -154,6 +175,9 @@ const askNodeModules = () =>
 
 const askBrew = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-brew')) {
+      return resolve();
+    }
     if (args.includes('--keep-brew')) {
       updateBrew = false;
       return resolve();
@@ -165,6 +189,9 @@ const askBrew = () =>
 
 const askUpdatePods = () =>
   new Promise((resolve) => {
+    if (args.includes('--default-pods')) {
+      return resolve();
+    }
     if (args.includes('--keep-pods')) {
       updatePods = false;
       return resolve();
